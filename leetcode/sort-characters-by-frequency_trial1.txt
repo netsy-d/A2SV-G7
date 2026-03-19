@@ -1,0 +1,10 @@
+from collections import Counter
+class Solution:
+    def frequencySort(self, s: str) -> str:
+        count = Counter(s)
+        result = ""
+        
+        for ch in sorted(count, key=count.get, reverse=True):
+            result += ch * count[ch]
+        
+        return result
