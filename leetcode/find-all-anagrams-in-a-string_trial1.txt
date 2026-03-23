@@ -1,0 +1,24 @@
+class Solution:
+    def findAnagrams(self, s: str, p: str):
+        n, k = len(s), len(p)
+        if k > n:
+            return []
+
+        p_freq = [0]*26
+        s_freq = [0]*26
+
+        for i in range(k):
+            p_freq[ord(p[i]) - 97] += 1
+            s_freq[ord(s[i]) - 97] += 1
+
+        result = []
+
+        for i in range(k, n+1):
+            if s_freq == p_freq:
+                result.append(i - k)
+
+            if i < n:
+                s_freq[ord(s[i]) - 97] += 1
+                s_freq[ord(s[i-k]) - 97] -= 1
+
+        return result
